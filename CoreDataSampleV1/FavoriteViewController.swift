@@ -10,9 +10,22 @@ import UIKit
 
 class FavoriteViewController: UIViewController {
 
+    var favs = [Fav]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        let appDelegate = (UIApplication.shared.delegate) as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        
+        do{
+            let result = try context.fetch(Fav.fetchRequest())
+            favs = result as! [Fav]
+            
+        } catch{
+            print("Error")
+        }
+        
         // Do any additional setup after loading the view.
     }
 
@@ -22,14 +35,29 @@ class FavoriteViewController: UIViewController {
     }
     
 
-    /*
-    // MARK: - Navigation
+    
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+}
+
+
+extension FavoriteViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return favs.count
     }
-    */
-
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "coreCell", for: indexPath)
+        let name = favs[indexPath.row]
+        cell.textLabel?.text = name.name
+        return cell
+    }
+    
+    
+    
+    
+    
+    
+    
+    
 }

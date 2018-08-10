@@ -62,13 +62,13 @@
 			children = (
 				A8D697C4211DE2EE00C26C57 /* AppDelegate.swift */,
 				A8D697C6211DE2EE00C26C57 /* ViewController.swift */,
+				A8D697DB211E0E0B00C26C57 /* FavoriteViewController.swift */,
 				A8D697C8211DE2EE00C26C57 /* Main.storyboard */,
 				A8D697CE211DE2F000C26C57 /* Assets.xcassets */,
 				A8D697D0211DE2F000C26C57 /* LaunchScreen.storyboard */,
 				A8D697D3211DE2F000C26C57 /* Info.plist */,
 				A8D697CB211DE2EE00C26C57 /* CoreDataSampleV1.xcdatamodeld */,
 				A8D697D9211DF92C00C26C57 /* CustomTableViewCell.swift */,
-				A8D697DB211E0E0B00C26C57 /* FavoriteViewController.swift */,
 			);
 			path = CoreDataSampleV1;
 			sourceTree = "<group>";

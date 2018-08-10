@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 var array = ["burk","ayşe"]
 
@@ -33,16 +34,28 @@ class ViewController: UIViewController {
         print("Selam \(name)")
         
         
+        let appDelegate = (UIApplication.shared.delegate) as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        
+        
+        
         if buttonClickedOnce {
             sender.backgroundColor = UIColor.red
             buttonClickedOnce = false
+            
+            let fav = Fav(context: context)
+            fav.name = name
+            appDelegate.saveContext()
         }
         else{
             sender.backgroundColor = UIColor.clear
             buttonClickedOnce = true
+            if let result = try? context.fetch(Fav.fetchRequest()) {
+                context.delete(result[rowSelected] as! NSManagedObject)
+            }
         }
-        
-        
+
+       
         
     }
     
