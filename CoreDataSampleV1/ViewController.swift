@@ -14,6 +14,7 @@ var array = ["burk","ayşe"]
 class ViewController: UIViewController {
 
     var buttonClickedOnce = true
+    var checkFav = [Fav]()
     
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
@@ -43,16 +44,49 @@ class ViewController: UIViewController {
             sender.backgroundColor = UIColor.red
             buttonClickedOnce = false
             
-            let fav = Fav(context: context)
-            fav.name = name
-            appDelegate.saveContext()
+            
+            do{
+                let result = try context.fetch(Fav.fetchRequest())
+                checkFav = result as! [Fav]
+               
+                
+                if checkFav.isEmpty{
+                    let fav = Fav(context: context)
+                    fav.name = name
+                    appDelegate.saveContext()
+                }
+                else{
+                    let checkName = array[rowSelected]
+                    
+                    for value in checkFav{
+                        if value.name == checkName{
+                            print("You already have this name ")
+        
+                        }
+                        else {
+                            let fav = Fav(context: context)
+                            fav.name = name
+                            appDelegate.saveContext()
+                        }
+                        
+                    }
+                   
+                }
+                
+              
+                
+            } catch{
+                print("Error")
+            }
+            
+            
         }
         else{
             sender.backgroundColor = UIColor.clear
             buttonClickedOnce = true
-            if let result = try? context.fetch(Fav.fetchRequest()) {
-                context.delete(result[rowSelected] as! NSManagedObject)
-            }
+//            if let result = try? context.fetch(Fav.fetchRequest()) {
+//                context.delete(result[rowSelected] as! NSManagedObject)
+//            }
         }
 
        
