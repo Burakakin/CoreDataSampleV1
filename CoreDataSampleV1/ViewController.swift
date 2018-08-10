@@ -12,6 +12,8 @@ var array = ["burk","ayşe"]
 
 class ViewController: UIViewController {
 
+    var buttonClickedOnce = true
+    
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,9 +27,23 @@ class ViewController: UIViewController {
     
     
     @objc func addFav(sender: UIButton) {
-        print("selam")
+        
         let rowSelected = sender.tag
-        print(rowSelected)
+        let name = array[rowSelected]
+        print("Selam \(name)")
+        
+        
+        if buttonClickedOnce {
+            sender.backgroundColor = UIColor.red
+            buttonClickedOnce = false
+        }
+        else{
+            sender.backgroundColor = UIColor.clear
+            buttonClickedOnce = true
+        }
+        
+        
+        
     }
     
 
@@ -42,8 +58,8 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CustomTableViewCell
         cell.nameLabel.text = array[indexPath.row]
-        cell.favButton.tag = indexPath.row
         
+        cell.favButton.tag = indexPath.row
         cell.favButton.addTarget(self, action: #selector(addFav(sender:)), for: UIControlEvents.touchUpInside)
         
         return cell

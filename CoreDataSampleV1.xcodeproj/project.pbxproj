@@ -14,6 +14,7 @@
 		A8D697CF211DE2F000C26C57 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A8D697CE211DE2F000C26C57 /* Assets.xcassets */; };
 		A8D697D2211DE2F000C26C57 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A8D697D0211DE2F000C26C57 /* LaunchScreen.storyboard */; };
 		A8D697DA211DF92C00C26C57 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D697D9211DF92C00C26C57 /* CustomTableViewCell.swift */; };
+		A8D697DC211E0E0B00C26C57 /* FavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D697DB211E0E0B00C26C57 /* FavoriteViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		A8D697D1211DE2F000C26C57 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A8D697D3211DE2F000C26C57 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A8D697D9211DF92C00C26C57 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
+		A8D697DB211E0E0B00C26C57 /* FavoriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +68,7 @@
 				A8D697D3211DE2F000C26C57 /* Info.plist */,
 				A8D697CB211DE2EE00C26C57 /* CoreDataSampleV1.xcdatamodeld */,
 				A8D697D9211DF92C00C26C57 /* CustomTableViewCell.swift */,
+				A8D697DB211E0E0B00C26C57 /* FavoriteViewController.swift */,
 			);
 			path = CoreDataSampleV1;
 			sourceTree = "<group>";
@@ -145,6 +148,7 @@
 				A8D697CD211DE2EE00C26C57 /* CoreDataSampleV1.xcdatamodeld in Sources */,
 				A8D697DA211DF92C00C26C57 /* CustomTableViewCell.swift in Sources */,
 				A8D697C5211DE2EE00C26C57 /* AppDelegate.swift in Sources */,
+				A8D697DC211E0E0B00C26C57 /* FavoriteViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
