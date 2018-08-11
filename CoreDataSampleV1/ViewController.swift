@@ -9,17 +9,25 @@
 import UIKit
 import CoreData
 
-var array = ["burk","ayşe"]
+var array = ["burk","meh","özle"]
+
+let appDelegate = (UIApplication.shared.delegate) as! AppDelegate
+let context = appDelegate.persistentContainer.viewContext
+let fav = Fav(context: context)
 
 class ViewController: UIViewController {
 
     var buttonClickedOnce = true
     var checkFav = [Fav]()
     
+   
+    
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+       
     }
 
     override func didReceiveMemoryWarning() {
@@ -28,52 +36,35 @@ class ViewController: UIViewController {
     }
     
     
+    func addFavorite(for name : String) throws -> Bool {
+        let request : NSFetchRequest<Fav> = Fav.fetchRequest()
+        request.predicate = NSPredicate(format: "name = %@", name)
+        request.fetchLimit = 1
+        if let _ = try context.fetch(request).first {
+            return false // record exists
+        } else {
+            let fav = Fav(context: context)
+            fav.name = name
+            appDelegate.saveContext()
+            return true // record added
+        }
+    }
+    
+    
     @objc func addFav(sender: UIButton) {
         
         let rowSelected = sender.tag
         let name = array[rowSelected]
-        print("Selam \(name)")
-        
-        
-        let appDelegate = (UIApplication.shared.delegate) as! AppDelegate
-        let context = appDelegate.persistentContainer.viewContext
-        
-        
-        
+        //print("Selam \(name)")
+
         if buttonClickedOnce {
             sender.backgroundColor = UIColor.red
             buttonClickedOnce = false
             
             
             do{
-                let result = try context.fetch(Fav.fetchRequest())
-                checkFav = result as! [Fav]
-               
-                
-                if checkFav.isEmpty{
-                    let fav = Fav(context: context)
-                    fav.name = name
-                    appDelegate.saveContext()
-                }
-                else{
-                    let checkName = array[rowSelected]
-                    
-                    for value in checkFav{
-                        if value.name == checkName{
-                            print("You already have this name ")
-        
-                        }
-                        else {
-                            let fav = Fav(context: context)
-                            fav.name = name
-                            appDelegate.saveContext()
-                        }
-                        
-                    }
-                   
-                }
-                
-              
+                let now = try addFavorite(for: name)
+                print(now)
                 
             } catch{
                 print("Error")
