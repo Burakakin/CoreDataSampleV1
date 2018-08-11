@@ -41,12 +41,29 @@ class ViewController: UIViewController {
         request.predicate = NSPredicate(format: "name = %@", name)
         request.fetchLimit = 1
         if let _ = try context.fetch(request).first {
+            print("Zaten ekledin")
             return false // record exists
         } else {
             let fav = Fav(context: context)
             fav.name = name
             appDelegate.saveContext()
+            print("Eklendi")
             return true // record added
+        }
+    }
+    
+    
+    func deleteFav(for name : String) throws -> Bool {
+        let request : NSFetchRequest<Fav> = Fav.fetchRequest()
+        request.predicate = NSPredicate(format: "name = %@", name)
+        request.fetchLimit = 1
+        if let deleteRecord = try context.fetch(request).first {
+            context.delete(deleteRecord)
+            try context.save()
+            print("Sildin")
+            return false // record exists
+        } else {
+            return true
         }
     }
     
@@ -60,12 +77,8 @@ class ViewController: UIViewController {
         if buttonClickedOnce {
             sender.backgroundColor = UIColor.red
             buttonClickedOnce = false
-            
-            
             do{
-                let now = try addFavorite(for: name)
-                print(now)
-                
+                let _ = try addFavorite(for: name)
             } catch{
                 print("Error")
             }
@@ -75,9 +88,11 @@ class ViewController: UIViewController {
         else{
             sender.backgroundColor = UIColor.clear
             buttonClickedOnce = true
-//            if let result = try? context.fetch(Fav.fetchRequest()) {
-//                context.delete(result[rowSelected] as! NSManagedObject)
-//            }
+            do{
+                let _ = try deleteFav(for: name)
+            } catch{
+                print("Error")
+            }
         }
 
        
