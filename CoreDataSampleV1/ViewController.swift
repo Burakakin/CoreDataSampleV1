@@ -35,19 +35,34 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func alert(with title: String,for message: String ){
+        
+        
+        // create the alert
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+        
+        // add an action (button)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+        
+        // show the alert
+        self.present(alert, animated: true, completion: nil)
+        
+        
+    }
     
     func addFavorite(for name : String) throws -> Bool {
         let request : NSFetchRequest<Fav> = Fav.fetchRequest()
         request.predicate = NSPredicate(format: "name = %@", name)
         request.fetchLimit = 1
         if let _ = try context.fetch(request).first {
-            print("Zaten ekledin")
+            alert(with: name, for: "Zaten Ekledin")
+//            print("Zaten ekledin")
             return false // record exists
         } else {
             let fav = Fav(context: context)
             fav.name = name
             appDelegate.saveContext()
-            print("Eklendi")
+            alert(with: name, for: "Eklendi")
             return true // record added
         }
     }
@@ -60,7 +75,7 @@ class ViewController: UIViewController {
         if let deleteRecord = try context.fetch(request).first {
             context.delete(deleteRecord)
             try context.save()
-            print("Sildin")
+            alert(with: name, for: "Sildin")
             return false // record exists
         } else {
             return true
